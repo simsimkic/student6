@@ -1,0 +1,38 @@
+﻿<Window x:Class="Project.Views.Director.OrderMedicineModal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Views.Director"
+        xmlns:util="clr-namespace:Project.Views.Utils.Validation"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Porucivanje lekova" Height="387.931" Width="350">
+    <materialDesign:Card>
+        <Grid>
+            <Label Content="{DynamicResource type}" HorizontalAlignment="Left" Margin="60,130,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,-0.208"/>
+            <Label Content="{DynamicResource name}" HorizontalAlignment="Left" Margin="60,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,-0.208"/>
+            <Label Content="{DynamicResource quantity}" HorizontalAlignment="Left" Margin="60,187,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,-0.208"/>
+            <!--<Label Content="Staviti u:" HorizontalAlignment="Left" Margin="60,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.278,-0.208"/> -->
+            <TextBox Text="{Binding Medicine.Name,Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="176,77,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+            <TextBox Text="{Binding Medicine.Type,Mode=OneWay}" HorizontalAlignment="Left" Height="23" Margin="176,130,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" />
+            <TextBox Name="NewMedicineQuantity" HorizontalAlignment="Left" Height="23" Margin="176,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                <TextBox.Text>
+                    <Binding Path="Quantity" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <util:NumberValidate ValidationStep="RawProposedValue" Min="0" Max="100"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <!--<ComboBox HorizontalAlignment="Left" Margin="176,248,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem IsSelected="True" Content="Magacin"/>
+            <ComboBoxItem Content="Bolnica"/> 
+
+        </ComboBox> -->
+            <Button Content="{DynamicResource cancel}" HorizontalAlignment="Left" Margin="206,273,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="1.827,0.562" Click="CloseMedicineOrder"/>
+            <Button Content="{DynamicResource confirm}" HorizontalAlignment="Left" Margin="60,273,0,0" VerticalAlignment="Top" Width="86" RenderTransformOrigin="1.827,0.562" Click="SaveMedicineOrder"/>
+
+        </Grid>
+    </materialDesign:Card>
+</Window>

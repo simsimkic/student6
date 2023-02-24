@@ -1,0 +1,39 @@
+﻿<Window x:Class="Project.Views.Director.RenovationModal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Views.Director"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Zakazivanje reonovacije" Height="500" Width="450">
+        <materialDesign:Card>
+        <Grid>
+            <Label Content="{DynamicResource renovationType}" HorizontalAlignment="Left" Margin="79,50,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
+            <ComboBox Name="RenType" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="220,50,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="AdjustRenovationModal">
+                <ComboBoxItem IsSelected="True" Content="Promena funkcije"></ComboBoxItem>
+                <ComboBoxItem Content="Rusenje"></ComboBoxItem>
+                <ComboBoxItem Content="Pregradjivanje"></ComboBoxItem>
+            </ComboBox>
+            <Label Content="{DynamicResource beginning}" HorizontalAlignment="Left" Margin="79,96,0,0" VerticalAlignment="Top" FontSize="15"/>
+            <Label Content="{DynamicResource end}" HorizontalAlignment="Left" Margin="79,147,0,0" VerticalAlignment="Top" FontSize="15"/>
+            <DatePicker Name="RenBegin" IsEnabled="False" HorizontalAlignment="Left" Margin="220,99,0,0" VerticalAlignment="Top" Width="120" DisplayDate="2020-05-17"/>
+            <DatePicker Name="RenEnd" IsEnabled="False" HorizontalAlignment="Left" Margin="220,147,0,0" VerticalAlignment="Top" Width="120" DisplayDate="2020-05-20"/>
+            <Button Content="{DynamicResource confirm}" HorizontalAlignment="Left" Margin="39,387,0,0" VerticalAlignment="Top" Width="150" Click="SaveRenovationAppointment"/>
+            <Button Content="{DynamicResource cancel}" HorizontalAlignment="Left" Margin="256,387,0,0" VerticalAlignment="Top" Width="150" Click="CloseRenovationAppointment"/>
+            <ComboBox Name="RoomType" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="220,202,0,0" VerticalAlignment="Top" Width="120">
+                <ComboBoxItem>Operaciona sala</ComboBoxItem>
+                <ComboBoxItem>Soba za preglede</ComboBoxItem>
+                <ComboBoxItem>Intenzivna nega</ComboBoxItem>
+            </ComboBox>
+            <Label Content="{DynamicResource roomtype}" HorizontalAlignment="Left" Margin="79,200,0,0" VerticalAlignment="Top" FontSize="15"/>
+            <Label Content="{DynamicResource newroomtype}" HorizontalAlignment="Left" Margin="79,255,0,0" VerticalAlignment="Top" FontSize="15"/>
+            <ComboBox Name="NewRoomType" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="220,255,0,0" VerticalAlignment="Top" Width="120">
+                <ComboBoxItem>Operaciona sala</ComboBoxItem>
+                <ComboBoxItem>Soba za preglede</ComboBoxItem>
+                <ComboBoxItem>Intenzivna nega</ComboBoxItem>
+            </ComboBox>
+
+        </Grid>
+    </materialDesign:Card>
+</Window>

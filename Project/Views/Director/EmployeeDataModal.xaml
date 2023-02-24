@@ -1,0 +1,98 @@
+﻿<Window x:Class="Project.Views.Director.EmployeeDataModal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Views.Director"
+        xmlns:util="clr-namespace:Project.Views.Utils.Validation"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="EmployeeDataModal" Height="600" Width="350">
+    <materialDesign:Card>
+        <Grid>
+            <Label  Content="{DynamicResource empolyeetype}" HorizontalAlignment="Left" Margin="55,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.223,0.514"/>
+            <Label  Content="{DynamicResource specialisation}" HorizontalAlignment="Left" Margin="55,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.223,0.514"/>
+            <Label  Content="Email:" HorizontalAlignment="Left" Margin="55,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.223,0.514"/>
+            <Label  Content="{DynamicResource address}" HorizontalAlignment="Left" Margin="55,182,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.223,0.514"/>
+            <Label  Content="{DynamicResource firstName}" HorizontalAlignment="Left" Margin="55,225,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.223,0.514"/>
+            <Label  Content="{DynamicResource lastName}" HorizontalAlignment="Left" Margin="55,265,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.223,0.514"/>
+            <Label Content="{DynamicResource datOfBirth}" HorizontalAlignment="Left" Margin="55,303,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.223,0.514"/>
+            <Label Content="JMBG:" HorizontalAlignment="Left" Margin="55,338,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.223,0.514"/>
+            <Label Content="{DynamicResource hospital}" HorizontalAlignment="Left" Margin="55,381,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.223,0.514"/>
+            <ComboBox Name="NewEmployeeType" SelectedValuePath="Content" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="160,60,0,0">
+                <ComboBoxItem IsSelected="True">Lekar</ComboBoxItem>
+                <ComboBoxItem>Sekretar</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Name="NewEmployeeRole" SelectedValuePath="Content" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="160,105,0,0">
+                <ComboBoxItem IsSelected="True">Opsti</ComboBoxItem>
+                <ComboBoxItem>Hirurg</ComboBoxItem>
+            </ComboBox>
+            <TextBox Name="NewEmployeeEmail" HorizontalAlignment="Left" Height="23" Margin="160,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                <TextBox.Text>
+                    <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <util:EmailValidate ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Name="NewEmployeeAddress" HorizontalAlignment="Left" Height="23" Margin="160,181,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120">
+                <TextBox.Text>
+                    <Binding Path="Address" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <util:NewAddressValidate ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Name="NewEmployeeFirstName" HorizontalAlignment="Left" Height="23" Margin="160,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                <TextBox.Text>
+                    <Binding Path="FirstName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <util:NameValidate ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Name="NewEmployeeLastName" HorizontalAlignment="Left" Height="23" Margin="160,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                <TextBox.Text>
+                    <Binding Path="LastName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <util:NameValidate ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Name="NewEmployeeDateOfBirth" HorizontalAlignment="Left" Height="23" Margin="160,301,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120">
+                <TextBox.Text>
+                    <Binding Path="DateOfBirth" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <util:DateOfBirthValidate ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Name="NewEmployeeJmbg" HorizontalAlignment="Left" Height="23" Margin="160,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                <TextBox.Text>
+                    <Binding Path="Jmbg" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <util:JmbgValidate ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBox Name="NewEmployeeHospital" HorizontalAlignment="Left" Height="23" Margin="160,381,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+                <TextBox.Text>
+                    <Binding Path="Hospital" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <util:MultiWordValidate ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Button Content="{DynamicResource confirm}" HorizontalAlignment="Left" Margin="55,471,0,0" VerticalAlignment="Top" Width="106" Click="SaveEmployeeDataChanges"/>
+            <Button Content="{DynamicResource cancel}" HorizontalAlignment="Left" Margin="178,471,0,0" VerticalAlignment="Top" Width="102" Click="CancelEmployeeDataChanges"/>
+
+        </Grid>
+    </materialDesign:Card>
+</Window>

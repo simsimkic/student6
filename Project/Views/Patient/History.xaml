@@ -1,0 +1,63 @@
+﻿<Window x:Class="Project.Views.Patient.History"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Views.Patient"
+        mc:Ignorable="d"
+        Title="History" Height="720" Width="1280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="68*"/>
+            <RowDefinition Height="69*"/>
+            <RowDefinition Height="58*"/>
+            <RowDefinition Height="57*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="38*"/>
+            <RowDefinition Height="316*"/>
+            <RowDefinition Height="44*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="26*"/>
+            <ColumnDefinition Width="444*"/>
+            <ColumnDefinition Width="119*"/>
+            <ColumnDefinition Width="165*"/>
+            <ColumnDefinition Width="169*"/>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="99*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Past appointments:" FontSize="20" VerticalAlignment="Bottom" Height="35" Grid.Column="1"/>
+        <DataGrid Grid.Row="1" Grid.RowSpan="6" ItemsSource="{Binding PastAppoitments}" IsReadOnly="True" AutoGenerateColumns="False" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Time" Binding="{Binding Beginning, StringFormat=f}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Doctor" Binding="{Binding Doctors[0].FirstName}"/>
+                <DataGridTextColumn Header="Rating" Binding="{Binding Review.Rating}"/>
+                <DataGridTemplateColumn Header="View">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Tag="{Binding Id}" Click="Select_Click">View</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Image  Source="/Project;component/Resources/Images/Faces/doc.jpg" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="4" Grid.Row="1" VerticalAlignment="Bottom" Height="50" >
+            <Label Content="{Binding SelectedDoctor.FirstName}" FontSize="15"  Height="Auto" />
+            <Label Content="{Binding SelectedDoctor.LastName}" FontSize="15"  Height="Auto"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="4" Orientation="Horizontal" >
+            <Label Content="Rating:"  FontSize="15"/>
+            <Label Content="{Binding SelectedDoctor.AverageReviewScore}"  Height="Auto" FontSize="15"/>
+        </StackPanel>
+        <Label Content="Appointment Type:" FontSize="15" Grid.Column="3" Grid.Row="3"  VerticalAlignment="Bottom" Height="28"/>
+        <Label Content="{Binding SelectedAnamneza.Type}" FontSize="15" Grid.Column="3" Grid.Row="4"  VerticalAlignment="Top" Height="40"/>
+        <Label Content="Appointment Subject:" FontSize="15" Grid.Column="4" Grid.Row="3" VerticalAlignment="Bottom" Height="28"/>
+        <Label Content="{Binding SelectedAnamneza.Name}" FontSize="15" Grid.Column="4" Grid.Row="4"  VerticalAlignment="Top" Height="40"/>
+
+        <Label Content="Appointment summary:" FontSize="18" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Height="32"/>
+        <TextBlock x:Name="Amnezablok" Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="3" Margin="5" Text="{Binding SelectedAnamneza.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" TextWrapping="Wrap" />
+    </Grid>
+</Window>

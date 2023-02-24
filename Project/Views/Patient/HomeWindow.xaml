@@ -1,0 +1,270 @@
+﻿<Window x:Class="Project.Views.Patient.HomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Views.Patient"
+        xmlns:util="clr-namespace:Project.Views.Utils.Validation"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="HomeWindow" Height="720" Width="1280">
+    <Window.InputBindings>
+    </Window.InputBindings>
+    <TabControl>
+        <TabItem Header="Home" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="56*"/>
+                    <RowDefinition Height="44*"/>
+                    <RowDefinition Height="370*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="81*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="39*"/>
+                    <ColumnDefinition Width="425*"/>
+                    <ColumnDefinition Width="27*"/>
+                    <ColumnDefinition Width="254*"/>
+                    <ColumnDefinition Width="207*"/>
+                    <ColumnDefinition Width="157*"/>
+                    <ColumnDefinition Width="157*"/>
+
+                </Grid.ColumnDefinitions>
+                <Label Content="Appoitments:"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" Height="24"/>
+                <DataGrid x:Name="dataGridAppoitment" ItemsSource="{Binding Appoitments, Mode=TwoWay}"
+                          CanUserAddRows="False" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                        <DataGridTextColumn Header="Time" Binding="{Binding Beginning, StringFormat=f}"/>
+                        <DataGridCheckBoxColumn Header="Scheduled" Binding="{Binding IsScheduled}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="141" Click="ConfirmAppoitments_Click">Confirm Changes</Button>
+                <Label Content="History:" Grid.Column="3" Grid.Row="1" VerticalAlignment="Bottom" Height="24"/>
+                <DataGrid  x:Name="dataGridPastAppoitment" ItemsSource="{Binding PastAppoitments}" IsReadOnly="True"
+                          SelectionMode="Extended" AutoGenerateColumns="False" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="3">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
+                        <DataGridTextColumn Header="Time" Binding="{Binding Beginning, StringFormat=g}"/>
+                        <DataGridTextColumn Header="Doctor" Binding="{Binding Doctors[0].FirstName}"/>
+                        <DataGridTemplateColumn Header="Rate">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Tag="{Binding Id}" Click="Review_Click">Rate</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Top" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2" Margin="20,0,20,20">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="Number of people" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="Time" Labels="{Binding Labels}"></lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.DataTooltip>
+                        <lvc:DefaultTooltip SelectionMode="SharedYValues"></lvc:DefaultTooltip>
+                    </lvc:CartesianChart.DataTooltip>
+                </lvc:CartesianChart>
+                <Button Margin="5" Content="Detailed History" Click="History_Click" Height="Auto" Grid.Row="1" Grid.Column="4" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <Button Height="Auto" Margin="10,10,10,0" Content="Feedback" Click="Feedback_Click" Grid.Column="5"  Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <Button Height="Auto" Margin="10,10,10,0" Content="FAQ" Click="FAQ_Click" Grid.Column="6" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <Button Height="Auto" Margin="10,10,10,0" Content="Generate Report" Grid.Column="6" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Gen_Click"/>
+                <Button Height="Auto" Margin="10,10,10,0" Content="Ask Question" Grid.Column="5" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Question_Click"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Profile">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="430*"/>
+                        <ColumnDefinition Width="360*"/>
+                        <ColumnDefinition Width="430*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+
+                        <Label Content="First name:"/>
+                        <TextBox x:Name="firstName"  Margin="5" IsEnabled="False">
+                            <Binding Path="LoggedInPatient.FirstName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:NameValidate ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <Label Content="Last name:"/>
+                        <TextBox x:Name="lastName" Margin="5" IsEnabled="False">
+                            <Binding Path="LoggedInPatient.LastName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:NameValidate ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <Label Content="Birth Date:"/>
+                        <DatePicker x:Name="birthDate" Margin="5" SelectedDate="{Binding LoggedInPatient.DateOfBirth}" IsEnabled="False" />
+                        <Label Content="JMBG:"/>
+                        <TextBox x:Name="JMBG" Margin="5" IsEnabled="False">
+                            <Binding Path="LoggedInPatient.Jmbg" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:JmbgValidate ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <Label Content="Insurance number:"/>
+                        <TextBox x:Name="insuranceNumber" Margin="5" IsEnabled="False">
+                            <Binding Path="LoggedInPatient.InsurenceNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:InsuranceNumberValidate ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <Label Content="Gender:"/>
+                        <ComboBox x:Name="gender" Margin="5" Text="{Binding LoggedInPatient.Gender}" IsEnabled="False">
+                            <ComboBoxItem>Male</ComboBoxItem>
+                            <ComboBoxItem>Female</ComboBoxItem>
+                        </ComboBox>
+                        <Label Content="Country:"/>
+                        <TextBox x:Name="country" Margin="5" IsEnabled="False">
+                            <Binding Path="LoggedInPatient.Address.Country" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:AddressValidate ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <Label Content="City:"/>
+                        <TextBox x:Name="city" Margin="5" IsEnabled="False" >
+                            <Binding Path="LoggedInPatient.Address.City" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:AddressValidate ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <Label Content="PostCode:"/>
+                        <TextBox x:Name="postCode" Margin="5" IsEnabled="False" >
+                            <Binding Path="LoggedInPatient.Address.PostCode" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:PostCodeValidate ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <Grid Height="60">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27*"/>
+                                <RowDefinition Height="35*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="62*"/>
+                                <ColumnDefinition Width="142*"/>
+                                <ColumnDefinition Width="113*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Street:" Grid.Column="0" Grid.Row="0"/>
+                            <TextBox x:Name="street" Margin="5" IsEnabled="False" Grid.ColumnSpan="2" Grid.Row="1">
+                                <Binding Path="LoggedInPatient.Address.Street" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <util:AddressValidate ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <Label Content="Number:" Grid.Column="2" Grid.Row="0"/>
+                            <TextBox x:Name="number" Margin="5" IsEnabled="False" Grid.Column="2" Grid.Row="1">
+                                <Binding Path="LoggedInPatient.Address.Number" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <util:AddressNumberValidate ValidationStep="RawProposedValue"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                        </Grid>
+                        <Label Content="Email:"/>
+                        <TextBox x:Name="email" Margin="5" IsEnabled="False">
+                            <Binding Path="LoggedInPatient.Email" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:EmailValidate ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                        <Label Content="Password:"/>
+                        <PasswordBox x:Name="password" Margin="5" IsEnabled="False"/>
+                        <Grid Margin="10" Height="32">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26*" MaxWidth="80"/>
+                                <ColumnDefinition Width="32*"/>
+                                <ColumnDefinition Width="41*" MaxWidth="130"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="buttonEdit" Content="Edit" Grid.Column="0" Click="Edit_Click" />
+                            <Button x:Name="buttonSaveChanges" Content="Save changes" Grid.Column="2" Height="Auto" Click="SaveChanges_Click">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="IsEnabled" Value="false" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ElementName=firstName, Path=(Validation.HasError)}" Value="false" />
+                                                    <Condition Binding="{Binding ElementName=lastName, Path=(Validation.HasError)}" Value="false" />
+                                                    <Condition Binding="{Binding ElementName=JMBG, Path=(Validation.HasError)}" Value="false" />
+                                                    <Condition Binding="{Binding ElementName=insuranceNumber, Path=(Validation.HasError)}" Value="false" />
+                                                    <Condition Binding="{Binding ElementName=country, Path=(Validation.HasError)}" Value="false" />
+                                                    <Condition Binding="{Binding ElementName=city, Path=(Validation.HasError)}" Value="false" />
+                                                    <Condition Binding="{Binding ElementName=street, Path=(Validation.HasError)}" Value="false" />
+                                                    <Condition Binding="{Binding ElementName=number, Path=(Validation.HasError)}" Value="false" />
+                                                    <Condition Binding="{Binding ElementName=email, Path=(Validation.HasError)}" Value="false" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="IsEnabled" Value="true" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Appoitments">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="212*"/>
+                    <RowDefinition Height="382*"/>
+                    <RowDefinition Height="67*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="69*"/>
+                    <ColumnDefinition Width="575*"/>
+                    <ColumnDefinition Width="156*"/>
+                    <ColumnDefinition Width="131*"/>
+                    <ColumnDefinition Width="272*"/>
+                    <ColumnDefinition Width="63*"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="0,25,0,0">
+                    <Calendar SelectionMode="SingleRange"/>
+                </Viewbox>
+                <StackPanel Grid.Column="3" Grid.Row="0" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="188">
+                    <Label Content="Priority:" Height="Auto"/>
+                    <RadioButton Margin="5" GroupName="priority" IsChecked="True">Period</RadioButton>
+                    <RadioButton Margin="5"  GroupName="priority">Doctor</RadioButton>
+                    <Label Content="Doctor name:" Height="Auto"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Margin="5,7" Grid.Column="0" Height="28" >
+                            <ComboBoxItem>Doctor 1</ComboBoxItem>
+                        </ComboBox>
+                        <Button Grid.Column="1" Margin="5" Height="Auto" Click="Doctor_Click">View Doctor</Button>
+                    </Grid>
+                    <Button x:Name="ViewAvailableButton" Margin="5" Click="ViewAvailable_Click" >View Available Appointments</Button>
+                </StackPanel>
+                <DataGrid Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding AvailableAppoitments, Mode=TwoWay }" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Time" Binding="{Binding Beginning, StringFormat=f}" IsReadOnly="True"/>
+                        <DataGridCheckBoxColumn Header="Scheduled" Binding="{Binding IsScheduled}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="ConfirmButton" Content="Confirm" Margin="10,10,0,0" Grid.Column="3" Grid.Row="2" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ConfirmAvailable_Click" IsEnabled="False"/>
+                <Button x:Name="CancelButton" Content="Cancel" Margin="10,10,0,0" Grid.Column="4" Grid.Row="2" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Click="CancelAvailable_Click" IsEnabled="False"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

@@ -1,0 +1,14 @@
+﻿<Window x:Class="Project.Views.Doctor.Alert"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Views.Doctor"
+        mc:Ignorable="d"
+        Title="Alert" Height="164.518" Width="251.676">
+    <Grid Margin="0,0,3.6,3.733">
+        <TextBlock HorizontalAlignment="Left" Height="32.784" Margin="41.733,28.667,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155.01"><Run Text="Operacija uspšno izvršena!"/></TextBlock>
+        <Button Click="Button_Click" Content="Potvrdi" Height="Auto" Margin="61.466,81.827,70.877,7.224"/>
+
+    </Grid>
+</Window>

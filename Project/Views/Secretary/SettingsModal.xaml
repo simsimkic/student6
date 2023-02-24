@@ -1,0 +1,161 @@
+﻿<Window x:Class="Project.Views.Secretary.SettingsModal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStartupLocation="CenterScreen"
+        xmlns:local="clr-namespace:Project.Views.Secretary"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="SettingsModal"
+        Height="400.5"
+        Width="867.5">
+    <Grid >
+        <TabControl HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    >
+            <TabItem Header="Profil">
+                <Grid Margin="0,-20,-4,0">
+                    <Grid HorizontalAlignment="Left"
+                          Height="44"
+                          VerticalAlignment="Top"
+                          Width="1243"
+                          Margin="0,37,0,0" />
+                    <Grid HorizontalAlignment="Left"
+                          Height="320"
+                          Margin="66,38,0,0"
+                          VerticalAlignment="Top"
+                          Width="260">
+                        <Image HorizontalAlignment="Left"
+                               Height="221"
+                               Margin="27,40,0,0"
+                               VerticalAlignment="Top"
+                               Width="207"
+                               Source="../../Resources/Images/Faces/face5" />
+                        <Button Content="Izmeni sliku"
+                                HorizontalAlignment="Right"
+                                Margin="0,271,26,0"
+                                VerticalAlignment="Top"
+                                Width="207"
+                                Height="30" />
+                    </Grid>
+                    <Grid HorizontalAlignment="Left"
+                          Height="306"
+                          Margin="330,52,0,0"
+                          VerticalAlignment="Top"
+                          Width="400">
+                              <Grid Margin="15,0,37,176">
+                            <materialDesign:Card Margin="0,-14,0,2">
+
+                                <Grid>
+                                    <Label Content="Ime:"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Width="87"
+                                           Margin="22,49,0,0" />
+                                    <Label Content="Prezime:"
+                                           HorizontalAlignment="Left"
+                                           Margin="22,79,0,0"
+                                           VerticalAlignment="Top"
+                                           Width="87" />
+                                    <TextBox x:Name="Profile_FirstName"
+                                             IsEnabled="False"
+                                             HorizontalAlignment="Left"
+                                             Height="23"
+                                             Margin="137,49,0,0"
+                                             TextWrapping="Wrap"
+                                             VerticalAlignment="Top"
+                                             Width="176" />
+                                    <TextBox x:Name="Profile_LastName"
+                                             IsEnabled="False"
+                                             HorizontalAlignment="Left"
+                                             Height="23"
+                                             Margin="137,79,0,0"
+                                             TextWrapping="Wrap"
+                                             VerticalAlignment="Top"
+                                             Width="176" />
+                                    <Label Content="Datum Rodjenja:"
+                                           HorizontalAlignment="Left"
+                                           Margin="22,109,0,0"
+                                           VerticalAlignment="Top"
+                                           Width="101" />
+                                    <DatePicker x:Name="Profile_DateOfBirth"
+                                                IsEnabled="False"
+                                                HorizontalAlignment="Left"
+                                                Height="23"
+                                                Margin="137,109,0,0"
+                                                VerticalAlignment="Top"
+                                                Width="176" />
+                                    <Label Content="Lične Informacije: "
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           HorizontalAlignment="Left"
+                                           Margin="6,9,0,0"
+                                           VerticalAlignment="Top" />
+                                </Grid>
+                            </materialDesign:Card>
+                        </Grid>
+                        <Grid Margin="15,120,37,33">
+                            <materialDesign:Card Margin="0,23,0,9">
+                                <Grid>
+                                    <Label Content="Email:"
+                                           HorizontalAlignment="Left"
+                                           Margin="30,49,0,0"
+                                           VerticalAlignment="Top" />
+                                    <Label Content="Broj Telefona:"
+                                           HorizontalAlignment="Left"
+                                           Margin="30,79,0,0"
+                                           VerticalAlignment="Top" />
+                                    <TextBox x:Name="Profile_Email"
+                                             IsEnabled="False"
+                                             HorizontalAlignment="Left"
+                                             Height="23"
+                                             Margin="145,49,0,0"
+                                             TextWrapping="Wrap"
+                                             VerticalAlignment="Top"
+                                             Width="174" />
+                                    <TextBox x:Name="Profile_TelephoneNumber"
+                                             IsEnabled="False"
+                                             HorizontalAlignment="Left"
+                                             Height="24"
+                                             Margin="145,79,0,0"
+                                             TextWrapping="Wrap"
+                                             VerticalAlignment="Top"
+                                             Width="174" />
+                                    <Label Content="Contact: "
+                                           FontWeight="Bold"
+                                           FontSize="14"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Margin="7,11,0,0" />
+                                </Grid>
+                            </materialDesign:Card>
+                        </Grid>
+                        <Button Content="Izmeni"
+                                FontSize="11"
+                                HorizontalAlignment="Left"
+                                Margin="15,274,0,0"
+                                VerticalAlignment="Top"
+                                Width="83"
+                                Height="23"
+                                Click="Change_Click"
+                                x:Name="Izmeni" />
+                        <Button Content="Obustavi"
+                                FontSize="11"
+                                HorizontalAlignment="Left"
+                                Visibility="Hidden"
+                                Background="Maroon"
+                                Margin="15,274,0,0"
+                                VerticalAlignment="Top"
+                                Width="83"
+                                Height="23"
+                                Click="Cancel_Click"
+                                x:Name="Obustavi" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Podešavanja" />
+        </TabControl>
+
+    </Grid>
+</Window>

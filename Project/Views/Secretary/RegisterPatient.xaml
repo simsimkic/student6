@@ -1,0 +1,234 @@
+﻿<Window x:Class="Project.Views.Secretary.RegisterPatient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Views.Secretary"
+        xmlns:util="clr-namespace:Project.Views.Utils.Validation"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Registruj Pacijenta"
+        Height="722"
+        Width="520">
+    <Grid Margin="0,0,0,0"
+          Height="775"
+          VerticalAlignment="Top">
+        <Grid Margin="0,0,0,71">
+            <Grid Margin="10,0,0,25">
+                <StackPanel Orientation="Vertical"
+                            Margin="70,10,10,-34">
+                    <Grid Height="52"
+                          Margin="0,5,0,0">
+                        <Label Content="First Name:"
+                               Margin="0,25,220,4" />
+                        <TextBox x:Name="firstName"
+                                 Margin="144,16,84,7"
+                                 RenderTransformOrigin="0.5,0.5">
+                            <Binding Path="RegisteringPatient.LastName"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:NameValidate ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                    </Grid>
+                    <Grid Height="49"
+                          Margin="0,0,49,0">
+                        <Label Content="Last name:"
+                               Margin="0,23,211,0" />
+                        <TextBox x:Name="lastName"
+                                 Margin="146,23,35,2">
+                            <Binding Path="RegisteringPatient.LastName"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:NameValidate ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                    </Grid>
+                    <Grid Height="61"
+                          Margin="0,0,75,0">
+                        <Label Content="Date of Birth:"
+                               Margin="-1,14,207,20" />
+                        <DatePicker x:Name="birthDate"
+                                    Margin="147,13,9,23"
+                                    SelectedDate="{Binding RegisteringPatient.DateOfBirth}" />
+                    </Grid>
+                    <Grid Height="48">
+                        <Label Content="JMBG:" />
+                        <TextBox x:Name="JMBG"
+                                 Margin="146,0,85,20">
+                            <Binding Path="RegisteringPatient.Jmbg"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:JmbgValidate ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                    </Grid>
+                    <Grid Height="56"
+                          HorizontalAlignment="Left"
+                          Width="406">
+                        <Label Content="Insurance number:"
+                               Margin="0,0,0,33" />
+                        <TextBox x:Name="insuranceNumber"
+                                 Margin="146,0,69,30">
+                            <Binding Path="RegisteringPatient.InsurenceNumber"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:InsuranceNumberValidate ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                    </Grid>
+                    <Grid Height="57">
+                        <Label Content="Gender:" />
+                        <ComboBox x:Name="gender"
+                                  Margin="146,0,85,30"
+                                  Text="{Binding RegisteringPatient.Gender}"
+                                  RenderTransformOrigin="0.5,0.5">
+                            <ComboBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform Angle="0.05" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </ComboBox.RenderTransform>
+                            <ComboBoxItem Content="Male" />
+                            <ComboBoxItem Content="Female" />
+                        </ComboBox>
+                    </Grid>
+                    <Grid Height="54">
+                        <Label Content="Country:" />
+                        <TextBox x:Name="country"
+                                 Margin="146,0,85,30">
+                            <Binding Path="RegisteringPatient.Address.Country"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:AddressValidate ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                    </Grid>
+                    <Grid Height="54">
+                        <Label Content="City:" />
+                        <TextBox x:Name="city"
+                                 Margin="146,0,85,30">
+                            <Binding Path="RegisteringPatient.Address.City"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:AddressValidate ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                    </Grid>
+                                     <Grid Height="60">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="27*" />
+                            <RowDefinition Height="35*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="62*" />
+                            <ColumnDefinition Width="142*" />
+                            <ColumnDefinition Width="113*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.ColumnSpan="3"
+                              Margin="0,0,0,5"
+                              Grid.RowSpan="2">
+
+                            <Label Content="Street:"
+                                   Grid.Column="0"
+                                   Grid.Row="0" />
+                            <TextBox x:Name="street"
+                                     Margin="146,0,138,31">
+                                <Binding Path="RegisteringPatient.Address.Street"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <util:AddressValidate ValidationStep="RawProposedValue" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                            <TextBox x:Name="number"
+                                     Margin="297,0,86,31"
+                                     RenderTransformOrigin="0.149,0.583">
+                                <Binding Path="RegisteringPatient.Address.Number"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <util:AddressNumberValidate ValidationStep="RawProposedValue" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox>
+                        </Grid>
+                    </Grid>
+                    <Grid Height="54">
+                        <Label Content="Email:" />
+                        <TextBox x:Name="email"
+                                 Margin="146,0,85,30">
+                            <Binding Path="RegisteringPatient.Email"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <util:EmailValidate ValidationStep="RawProposedValue" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox>
+                    </Grid>
+                    <Grid Height="54">
+                        <Label Content="Password:" />
+                        <TextBox x:Name="password"
+                                 Margin="146,0,85,30"
+                                 Text="{Binding RegisteringPatient.Password}" />
+                    </Grid>
+                    <Grid Margin="0,10,83,10"
+                          Height="32">
+                        <Button x:Name="buttonSubmit"
+                                Content="Potvrdi"
+                                Grid.Column="0"
+                                Click="Submit_Click"
+                                Margin="2,0,214,0" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="IsEnabled"
+                                        Value="false" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=firstName, Path=(Validation.HasError)}"
+                                                       Value="false" />
+                                            <Condition Binding="{Binding ElementName=lastName, Path=(Validation.HasError)}"
+                                                       Value="false" />
+                                            <Condition Binding="{Binding ElementName=JMBG, Path=(Validation.HasError)}"
+                                                       Value="false" />
+                                            <Condition Binding="{Binding ElementName=insuranceNumber, Path=(Validation.HasError)}"
+                                                       Value="false" />
+                                            <Condition Binding="{Binding ElementName=country, Path=(Validation.HasError)}"
+                                                       Value="false" />
+                                            <Condition Binding="{Binding ElementName=city, Path=(Validation.HasError)}"
+                                                       Value="false" />
+                                            <Condition Binding="{Binding ElementName=street, Path=(Validation.HasError)}"
+                                                       Value="false" />
+                                            <Condition Binding="{Binding ElementName=number, Path=(Validation.HasError)}"
+                                                       Value="false" />
+                                            <Condition Binding="{Binding ElementName=email, Path=(Validation.HasError)}"
+                                                       Value="false" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled"
+                                                Value="true" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        </Button>
+                        <Button x:Name="Cancel_Button"
+
+                                Background="Maroon"
+                                Content="Obustavi"
+                                Grid.Column="0"
+                                Click="Cancel_Click"
+                                Margin="218,0,0,0" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

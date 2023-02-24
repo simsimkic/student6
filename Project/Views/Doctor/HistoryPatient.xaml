@@ -1,0 +1,39 @@
+﻿<Window x:Class="Project.Views.Doctor.HistoryPatient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Views.Doctor"
+        mc:Ignorable="d"
+        Title="HistoryPatient" Height="510" Width="933.2">
+    <Grid>
+        <Button Click="Button_Click" Content="Nazad" HorizontalAlignment="Left" Height="37.2" Margin="27.1,409.2,0,0" VerticalAlignment="Top" Width="110.4" ToolTip="Vratiti se na korisnicku stranicu"/>
+        <TextBlock FontSize="14" HorizontalAlignment="Left" Height="242.4" Margin="514.7,144.3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372.8" Background="#FFEBEBEB"  Name="AnamnesisPateint" Text="{Binding AnamnesisPateint.}"/>
+        <ListBox Name="HistoryPatientList"  HorizontalAlignment="Left" Height="245.287" Margin="27.1,141.413,0,0" VerticalAlignment="Top" Width="372.8" BorderBrush="Gray" BorderThickness="2" SelectionChanged="HistoryPatientList_SelectionChanged"
+                 ItemsSource="{Binding Path=medicalAppointmentDTOs, UpdateSourceTrigger=PropertyChanged}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="[" />
+                        <TextBlock Text="{Binding  Beginning}" />
+                        <TextBlock Text=" - " />
+                        <TextBlock Text="{Binding  End}" />
+                        <TextBlock Text="] : " />
+                        <TextBlock Text="{Binding  Type}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <!--
+        <ListBox HorizontalAlignment="Left" Height="242.4" Margin="27.1,144.3,0,0" VerticalAlignment="Top" Width="285.6" Background="#FFEDEDED" ToolTip="Lista shiv pregleda">
+            <ListBoxItem FontSize="14" Content="23. 11. 2019 - Pregled - Dr. Kon" Width="275.6"/>
+            <ListBoxItem FontSize="14" Content="02. 01. 2020 - Kontrola - Dr. Kon" Width="275.6"/>
+            <ListBoxItem FontSize="14" Content="23. 01. 2020 - Operacija - Dr. Filip " Width="275.6"/>
+        </ListBox>-->
+        <TextBlock HorizontalAlignment="Left" Height="37.4" Margin="339.1,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163.2" FontSize="22" Text="Istorija pregleda "/>
+        <TextBlock HorizontalAlignment="Left" Height="37.4" Margin="339.1,47.4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292" FontSize="22" Text="{Binding PatientNameAndSurname}" Name="PatientNameAndSurnameTextBox" ToolTip="Naziv pacijenta"/>
+        <TextBlock HorizontalAlignment="Left" Height="37.4" Margin="27.1,89.86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163.2" FontSize="20" Text="Lista pregleda"/>
+        <TextBlock HorizontalAlignment="Left" Height="37.4" Margin="514.7,89.86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163.2" FontSize="20"><Run Text="Opis "/><Run Text="pregleda "/></TextBlock>
+
+    </Grid>
+</Window>

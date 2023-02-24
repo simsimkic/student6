@@ -1,0 +1,136 @@
+﻿<Window x:Class="Project.Views.Secretary.Test"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rules="clr-namespace:Project.Views.Validators"
+        xmlns:validate="clr-namespace:Project.Views.Utils.Validation"
+        xmlns:local="clr-namespace:Project.Views.Secretary"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Guest Account"
+        Height="404"
+        Width="558">
+    <Grid HorizontalAlignment="Left"
+          Height="372"
+          Margin="0,1,0,0"
+          VerticalAlignment="Top"
+          Width="554"
+          x:Name="Guest_Account_Create">
+        <materialDesign:Card Padding="32"
+                             Margin="17,16,19,10"
+                             MaxWidth="900"
+                             RenderTransformOrigin="0.5,0.5">
+            <Grid Margin="-17,-12,-17,-20">
+                <StackPanel Orientation="Horizontal"
+                            Margin="23,28,18,251">
+                    <Label Content="Ime i prezime:"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Width="87"
+                           Margin="0,-4,0,0" />
+                    <TextBox HorizontalAlignment="Left"
+                             Height="23"
+                             materialDesign:HintAssist.Hint="Petar"
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Top"
+                             Width="124"
+                             Margin="0,-4,0,0">
+                        <Binding Path="FirstName"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <rules:NotEmptyValidationRule  ValidationStep="RawProposedValue" />
+                                <validate:NameValidate  ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                    <TextBox HorizontalAlignment="Left"
+                             Height="23"
+                             materialDesign:HintAssist.Hint="Petrovic"
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Top"
+                             Width="179"
+                             Margin="0,-4,0,0">
+                        <Binding Path="LastName"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <rules:NotEmptyValidationRule  ValidationStep="RawProposedValue" />
+                                <validate:NameValidate ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                </StackPanel>
+                <Grid Margin="1,67,190,188">
+                    <Label Content="Adresa:"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Width="53"
+                           Margin="23,17,0,0"
+                           Height="28" />
+                    <TextBox HorizontalAlignment="Left"
+                             Height="23"
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Top"
+                             Width="178"
+                             Margin="106,17,-17,0">
+                        <Binding Path="Address"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validate:AddressValidate ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                </Grid>
+                <Grid Margin="291,79,73,199">
+                    <Label Content="Broj:"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Width="35"
+                           Margin="7,3,0,0" />
+                    <TextBox HorizontalAlignment="Left"
+                             Height="23"
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Top"
+                             Width="71"
+                             Margin="45,3,0,0">
+                        <Binding Path="Address"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validate:AddressNumberValidate ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                </Grid>
+                <Grid Margin="23,137,190,133">
+                    <Label Content="JMBG"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Width="87" />
+                    <TextBox HorizontalAlignment="Left"
+                             Height="23"
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Top"
+                             Width="181"
+                             Margin="83,-2,0,0">
+                        <Binding Path="JMBG"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validate:JmbgValidate ValidationStep="RawProposedValue" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox>
+                </Grid>
+                <Button Margin="23,260,377,23"
+                        Content="Poništi"
+                        Click="Button_Click"
+                        Background="Maroon"
+                        Height="Auto" />
+                <Button Margin="382,260,18,23"
+                        Content="Kreiraj"
+                        Click="Button_Click"
+                        Height="Auto" />
+
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>

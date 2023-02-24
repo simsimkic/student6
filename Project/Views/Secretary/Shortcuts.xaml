@@ -1,0 +1,78 @@
+﻿<Window x:Class="Project.Views.Secretary.Shortcuts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.Views.Secretary"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Shortcuts"
+        Height="210.052"
+        Width="455.385">
+
+    <Grid Margin="0,0,0,373">
+        <StackPanel Margin="0,1,0,-169">
+            <Label Content="Shortcuts"
+                   FontSize="15"
+                   FontWeight="Bold"
+                   Height="26">
+            </Label>
+
+        </StackPanel>
+        <Grid Margin="0,27,0,324">
+
+            <StackPanel Background="#FFECECEC"
+                        Width="426"
+                        Margin="10,0,11,-144">
+                <Grid Margin="0,0,0,0">
+                    <Label Content="F1"
+                           Margin="0,0,0,0"></Label>
+                    <Label Content="Shortcuts"
+                           HorizontalAlignment="Right"
+                           Width="126" />
+                </Grid>
+                <Grid Margin="0,0,0,0"
+                      Background="White">
+                    <Label Content="F2"
+                           Margin="0,0,0,0"></Label>
+                    <Label Content="Send Feedback"
+                           HorizontalAlignment="Right"
+                           Width="126" />
+                </Grid>
+                <Grid Margin="0,0,0,0">
+                    <Label Content="Ctrl+P"
+                           Margin="0,0,0,0"></Label>
+                    <Label Content="Generate Report"
+                           HorizontalAlignment="Right"
+                           Width="126" />
+                </Grid>
+                <Grid Margin="0,0,0,0"
+                      Background="White">
+                    <Label Content="Ctrl+N"
+                           Margin="0,0,0,0"></Label>
+                    <Label Content="New Appointment"
+                           HorizontalAlignment="Right"
+                           Width="126" />
+                </Grid>
+                <Grid Margin="0,0,0,0">
+                    <Label Content="Ctrl+Shift+N"
+                           Margin="0,0,0,0"></Label>
+                    <Label Content="Generate New Patient"
+                           HorizontalAlignment="Right"
+                           Width="126" />
+                </Grid>
+                <Grid Margin="0,0,0,0"
+                      Background="White">
+                                       <Label Content="Ctrl+F"
+                           Margin="0,0,0,0"
+                           Grid.ColumnSpan="2"></Label>
+                    <Label Content="Select Doctor"
+                           HorizontalAlignment="Right"
+                           Width="126"
+                           Grid.Column="1" />
+                </Grid>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
